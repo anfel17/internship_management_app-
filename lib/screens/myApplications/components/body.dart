@@ -43,26 +43,28 @@ class BodyState extends State<Body> {
               itemCount: applications.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey[300]!),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.grey[300]!),
+                    //   borderRadius: BorderRadius.circular(10),
+                    // ),
                     margin: EdgeInsets.symmetric(vertical: 5),
                     child: Card(
+                      color: Colors.lightBlue[50],
                       elevation: 8,
                       child: ListTile(
                         title: Text(applications[index]),
                         subtitle: Text('Tap to view details'),
                         trailing: Container(
                           decoration: BoxDecoration(
+                            color: Color(0xFF3A96B4),
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           padding: const EdgeInsets.symmetric(
                               vertical: 4, horizontal: 8),
                           child:Text(
-                            'accepted',
-                            style: TextStyle(fontSize: 14),
+                            'refused',
+                            style: TextStyle(fontSize: 14,color: Colors.white)
                           )
                         ),
                         leading: Icon(Icons.badge),

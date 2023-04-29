@@ -18,7 +18,6 @@ class BodyState extends State<Body> {
   int tel_etudiant = 0;
   int num_carte = 0;
   DateTime date_naissance = DateTime(2023, 5, 15);
-
   String lieu_naissance = "";
   String nom_departement = "";
 
@@ -36,7 +35,7 @@ class BodyState extends State<Body> {
         tel_etudiant = data[0]['tel_etudiant'];
         num_carte = data[0]['num_carte'];
         lieu_naissance = data[0]['lieu_naissance'];
-        date_naissance = data[0]['date_naissance'];
+       // date_naissance = data[0]['date_naissance'];
         nom_departement = data[0]['nom_departement'];
       });
     } else {
@@ -52,7 +51,7 @@ class BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat('yyyy-MM-dd').format(date_naissance);
+  //  String formattedDate = DateFormat('yyyy-MM-dd').format(date_naissance);
     return SingleChildScrollView(
         child: Column(
       children: [
@@ -193,13 +192,13 @@ class BodyState extends State<Body> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            formattedDate.toString(),
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          // Text(
+                          //   ${date_naissance.day},
+                          //   style: TextStyle(
+                          //     fontSize: 20.0,
+                          //     fontWeight: FontWeight.bold,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

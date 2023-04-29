@@ -28,7 +28,7 @@ class _NavDrawerState extends State<NavDrawer> {
             children: <Widget>[
               Container(
                 width: 100,
-                height: 100,
+                height: 50,
                 margin: const EdgeInsets.only(
                   top: 30,
                 ),
@@ -39,13 +39,13 @@ class _NavDrawerState extends State<NavDrawer> {
                       fit: BoxFit.fill),
                 ),
               ),
-              const Text("test"
-                ,
-                style: TextStyle(
-                  fontSize: 22,
-                  color: Colors.black,
-                ),
-              ),
+              // const Text("test"
+              //   ,
+              //   style: TextStyle(
+              //     fontSize: 22,
+              //     color: Colors.black,
+              //   ),
+              // ),
               // Text(
               //   '${user?.email}',
               //   style: TextStyle(
@@ -58,7 +58,7 @@ class _NavDrawerState extends State<NavDrawer> {
         Card(
           color: Colors.blueGrey[100],
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(80),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(
               leading: Icon(Icons.list_alt_sharp),
@@ -77,7 +77,7 @@ class _NavDrawerState extends State<NavDrawer> {
         Card(
           color: Colors.blueGrey[100],
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(80),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(
               leading: Icon(Icons.add_circle_outline_sharp),
@@ -96,7 +96,7 @@ class _NavDrawerState extends State<NavDrawer> {
         Card(
           color: Colors.blueGrey[100],
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(80),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(
               leading: Icon(Icons.list_alt_sharp),
@@ -115,7 +115,7 @@ class _NavDrawerState extends State<NavDrawer> {
         Card(
           color: Colors.blueGrey[100],
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(80),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(
             leading: Icon(Icons.logout),

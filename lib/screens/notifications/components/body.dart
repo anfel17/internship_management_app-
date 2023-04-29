@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../../../constants.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -6,13 +9,25 @@ class Body extends StatefulWidget {
 }
 
 class BodyState extends State<Body> {
-  final List<String> notifications = [
-    'Notification 1',
-    'Notification 2',
-    'Notification 3',
-    'Notification 4',
-    'Notification 5',
-  ];
+  List<dynamic> data = [];
+
+  Future<void> getStudentAccount() async {
+    Uri url = Uri.parse(getStudentNotif);
+    var response = await http.post(url, body: {'id': '1'});
+    if (response.statusCode == 200) {
+      setState(() {
+        data = json.decode(response.body);
+      });
+    } else {
+      print("error");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getStudentAccount();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +46,13 @@ class BodyState extends State<Body> {
           SizedBox(height: 20,),
           Expanded(
             child: ListView.builder(
-              itemCount: notifications.length,
+              itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   height: 70, // specify the height you want
                   child: ListTile(
-                    title: Text(notifications[index]),
+                    title: Text(data[index]['message'] ?? ''),
+                    subtitle: Text(data[index]['time'] ?? ''),
                     leading: Icon(Icons.notifications),
                     onTap: () {
                       // Navigate to notification details page

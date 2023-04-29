@@ -100,9 +100,20 @@ class BodyState extends State<Body> {
                           color: Colors.lightBlue[50],
                           elevation: 10,
                           child: ExpansionTile(
-
-                            title: Text(data[i]['theme']),
-                            subtitle: Text(data[i]['duree']),
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(data[i]['theme']),
+                                SizedBox(height: 5),
+                              ],
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 5),
+                                Text("duree: ${data[i]['duree']}"),
+                              ],
+                            ),
                             children: [
                               ListTile(
                                 title: Text(data[i]['description']),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internship_management_system/routes.dart';
 import 'package:internship_management_system/screens/home/home_screen.dart';
-
+import 'package:internship_management_system/screens/login/login_screen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       // theme: theme(),
       // home: SplashScreen(),
       // We use routeName so that we dont need to remember the name
-      initialRoute: HomeScreen.routeName,
+      initialRoute: LoginPage.routeName,
       routes: routes,
     );
   }
