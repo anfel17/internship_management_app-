@@ -6,6 +6,8 @@ import 'package:internship_management_system/screens/newApplication/newApplicati
 import 'package:internship_management_system/screens/myProfile/profile_screen.dart';
 import 'package:internship_management_system/screens/updateProfile/update_profile_screen.dart';
 import 'package:internship_management_system/screens/login/login_screen.dart';
+import 'package:internship_management_system/screens/myApplications/applicationDetailsScreen.dart';
+import 'package:internship_management_system/screens/marks/marks_screen.dart';
 
 
 final Map<String, WidgetBuilder> routes = {
@@ -16,4 +18,7 @@ final Map<String, WidgetBuilder> routes = {
    ProfileScreen.routeName: (context) => ProfileScreen(),
    UpdateProfileScreen.routeName: (context) => UpdateProfileScreen(),
    LoginPage.routeName: (context) => LoginPage(),
+   MarksScreen.routeName: (context) => MarksScreen(),
+  // applicationDetailsScreen.routeName: (context) => applicationDetailsScreen(data: data),
+
 };

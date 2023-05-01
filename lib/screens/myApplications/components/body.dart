@@ -1,5 +1,10 @@
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
+import 'package:internship_management_system/screens/myApplications/applicationDetailsScreen.dart';
+import 'dart:convert';
+import '../../../constants.dart';
+import 'package:internship_management_system/provider/user.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,15 +13,33 @@ class Body extends StatefulWidget {
   State<Body> createState() => BodyState();
 }
 
+
 class BodyState extends State<Body> {
 
-  final List<String> applications = [
-    'Application 1',
-    'Application 2',
-    'Application 3',
-    'Application 4',
-    'Application 5',
-  ];
+  List<dynamic> data = [];
+  String userId = '';
+  late UserProvider userProvider;
+
+  Future<void> listOfApplications(String userId) async {
+    Uri url = Uri.parse(applicationsList);
+    var response = await http.post(url, body: {'id': userId});
+
+    if (response.statusCode == 200) {
+      setState(() {
+        data = json.decode(response.body);
+        print (data);
+      });
+    } else {
+      print("error");
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+    userId = userProvider.userId;
+    listOfApplications(userId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,36 +63,40 @@ class BodyState extends State<Body> {
           SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemCount: applications.length,
+              itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                    // decoration: BoxDecoration(
-                    //   border: Border.all(color: Colors.grey[300]!),
-                    //   borderRadius: BorderRadius.circular(10),
-                    // ),
                     margin: EdgeInsets.symmetric(vertical: 5),
                     child: Card(
                       color: Colors.lightBlue[50],
                       elevation: 8,
                       child: ListTile(
-                        title: Text(applications[index]),
+                        title: Text(data[index]['theme']),
                         subtitle: Text('Tap to view details'),
                         trailing: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFF3A96B4),
-                            border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(5),
+                        //    border: Border.all(color: Colors.grey),
+                            color: data[index]['status'] == 'accepted' ? Colors.green :
+                            data[index]['status'] == 'pending' ? Colors.grey :
+                            data[index]['status'] == 'refused' ? Colors.red : Colors.transparent,
                           ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 8),
-                          child:Text(
-                            'refused',
-                            style: TextStyle(fontSize: 14,color: Colors.white)
-                          )
+                          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                          child: Text(
+                            data[index]['status'],
+                            style: TextStyle(fontSize: 14, color: Colors.white),
+                          ),
                         ),
                         leading: Icon(Icons.badge),
                         onTap: () {
-                          // Navigate to application details page
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => applicationDetailsScreen(
+                                data: data[index],
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ),

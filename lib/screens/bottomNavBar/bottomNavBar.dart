@@ -18,6 +18,17 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   String userId='';
   late UserProvider userProvider;
   int unseenStudentNotif=0;
+  Future<void> updateNotifications() async {
+    Uri url = Uri.parse(seeStudentNotif);
+    var response = await http.post(url, body: {'id': userId});
+
+    if (response.statusCode == 200) {
+      // Notification updated successfully
+    } else {
+      // Error updating notification
+    }
+  }
+
   Future<void> getUnseenNotifCount(String userId) async {
     Uri url = Uri.parse(unseenStudentNotifNbr);
     var response = await http.post(url, body: {'id':userId});
@@ -104,14 +115,14 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     _selectedIndex = index;
     });
     if (index == 2) {
+      updateNotifications();
     Navigator.pushNamed(context, NotificationsScreen.routeName);
     } else if (index == 1) {
     Navigator.pushNamed(context, ProfileScreen.routeName);
     } else if (index == 0) {
     Navigator.pushNamed(context, HomeScreen.routeName);
     }
-    },
-          );
+    },);
 
   }
 }

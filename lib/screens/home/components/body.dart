@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:internship_management_system/screens/newApplication/newApplication.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:google_fonts/google_fonts.dart';
 import '../../../constants.dart';
 
 class Body extends StatefulWidget {
@@ -82,12 +82,13 @@ class BodyState extends State<Body> {
                   SizedBox(width: 10),
                 ],
               ),
-              const Text(
+            Text(
                 'Internships List',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+               style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              ),
               ),
               SizedBox(height: 10),
               Expanded(
