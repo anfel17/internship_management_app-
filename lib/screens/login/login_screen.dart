@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:internship_management_system/screens/home/home_screen.dart';
 
 import '../../constants.dart';
+import '../../provider/user.dart';
+import 'package:provider/provider.dart';
+import 'package:email_validator/email_validator.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = "/LoginPage";
@@ -35,6 +38,10 @@ class _LoginPageState extends State<LoginPage> {
         final Map<String, dynamic> data = jsonDecode(response.body);
         final String token = data['authorisation']['token'];
         final Map<String, dynamic> user = data['user'];
+        final String userId = user['id_etudiant'].toString();
+
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.userId = userId;
 
         // Navigate to the home page
         Navigator.pushNamed(context, HomeScreen.routeName);
@@ -73,11 +80,25 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                    labelText: "Username"
-                ),
+              child: FormField<String>(
+                builder: (FormFieldState<String> state) {
+                  return TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      labelText: "Username",
+                      errorText: state.hasError ? state.errorText : null,
+                    ),
+                    onChanged: (value) {
+                      state.didChange(value);
+                    },
+                  );
+                },
+                validator: (value) {
+                  if (!EmailValidator.validate(value!)) {
+                    return 'Please enter a valid email address';
+                  }
+                  return null;
+                },
               ),
             ),
 
@@ -86,26 +107,24 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
+              child: TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
                     labelText: "Password"
                 ),
                 obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a password';
+                  }
+                  if (value.length < 6) {
+                    return 'Password must be at least 6 characters';
+                  }
+                  return null;
+                },
               ),
             ),
 
-            Container(
-              alignment: Alignment.centerRight,
-              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-              child: Text(
-                "Forgot your password?",
-                style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0XFF2661FA)
-                ),
-              ),
-            ),
 
             SizedBox(height: size.height * 0.05),
 
@@ -114,7 +133,18 @@ class _LoginPageState extends State<LoginPage> {
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: ElevatedButton(
                 onPressed: () {
-                  Login();
+                  if (EmailValidator.validate(_emailController.text) &&
+                      _passwordController.text.isNotEmpty) {
+                    // valid email and non-empty password
+                    Login();
+                  } else {
+                    // show error message
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Invalid email or password'),
+                      ),
+                    );
+                  }
                 },
                 style: ButtonStyle( backgroundColor: MaterialStateProperty.all(Color(0xFF276887)),),
 
@@ -132,7 +162,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-
             ),
           ],
         ),
@@ -140,3 +169,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+

@@ -2,31 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../../constants.dart';
+import 'package:internship_management_system/provider/user.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class Body extends StatefulWidget {
   @override
   State<Body> createState() => BodyState();
 }
-
 class BodyState extends State<Body> {
-  List<dynamic> data = [];
 
-  Future<void> getStudentAccount() async {
+  List<dynamic> data = [];
+  String userId = '';
+  late UserProvider userProvider;
+
+  Future<void> getStudentAccount(String userId) async {
     Uri url = Uri.parse(getStudentNotif);
-    var response = await http.post(url, body: {'id': '1'});
+    var response = await http.post(url, body: {'id': userId});
+
     if (response.statusCode == 200) {
       setState(() {
         data = json.decode(response.body);
+     print (data);
       });
     } else {
       print("error");
     }
   }
-
   @override
   void initState() {
     super.initState();
-    getStudentAccount();
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+    userId = userProvider.userId;
+    getStudentAccount(userId);
   }
 
   @override
@@ -52,7 +60,7 @@ class BodyState extends State<Body> {
                   height: 70, // specify the height you want
                   child: ListTile(
                     title: Text(data[index]['message'] ?? ''),
-                    subtitle: Text(data[index]['time'] ?? ''),
+                    subtitle: Text(DateFormat.yMMMMd().format(DateTime.parse(data[index]['timeStamp']))),
                     leading: Icon(Icons.notifications),
                     onTap: () {
                       // Navigate to notification details page

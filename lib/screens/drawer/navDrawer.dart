@@ -3,6 +3,8 @@ import 'package:internship_management_system/screens/home/home_screen.dart';
 import 'package:internship_management_system/screens/myApplications/myApplication_screen.dart';
 import 'package:internship_management_system/screens/newApplication/newApplication.dart';
 
+import '../login/login_screen.dart';
+
 class NavDrawer extends StatefulWidget {
   const NavDrawer({Key? key}) : super(key: key);
   @override
@@ -39,19 +41,6 @@ class _NavDrawerState extends State<NavDrawer> {
                       fit: BoxFit.fill),
                 ),
               ),
-              // const Text("test"
-              //   ,
-              //   style: TextStyle(
-              //     fontSize: 22,
-              //     color: Colors.black,
-              //   ),
-              // ),
-              // Text(
-              //   '${user?.email}',
-              //   style: TextStyle(
-              //     color: Colors.black,
-              //   ),
-              // )
             ],
           )),
       const SizedBox(height: 10),
@@ -129,7 +118,7 @@ class _NavDrawerState extends State<NavDrawer> {
             onTap: () {
               // userLogout();
               // Authentication.signOut(context: context);
-              // Navigator.pushNamed(context, SplashScreen.routeName);
+              Navigator.pushNamed(context, LoginPage.routeName);
             },
           ),
         ),
