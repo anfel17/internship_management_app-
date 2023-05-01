@@ -101,7 +101,9 @@ class BodyState extends State<Body> {
         padding: EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Column(
-            children: [ TextField(
+            children: [
+              SizedBox(height: 15.0),
+              TextField(
               controller: firstNameController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
