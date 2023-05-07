@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:internship_management_system/provider/user.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constants.dart';
 
@@ -94,13 +95,14 @@ class BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Container(
       child:SingleChildScrollView( child: Column(children: [
-        const Padding(
+         Padding(
           padding: EdgeInsets.all(16.0),
           child: Text(
             "Create New Application",
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.poppins(
+              fontSize: 25,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
             ),
           ),
         ),

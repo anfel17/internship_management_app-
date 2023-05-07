@@ -74,7 +74,7 @@ class BodyState extends State<Body> {
               padding: EdgeInsets.all(10),
               child: Card(
                 elevation: 10,
-                shape: Border(
+                shape: const Border(
                   top: BorderSide(
                     color: Color(0xFF276887),
                     width: 7,
@@ -83,7 +83,7 @@ class BodyState extends State<Body> {
                 child: Column(
                   children: [
                     SizedBox(height: 20),
-                    Align(
+                    const Align(
                       alignment: Alignment.center,
                       child: Text(
                         'capacite',
@@ -113,7 +113,7 @@ class BodyState extends State<Body> {
               padding: EdgeInsets.all(10),
               child: Card(
                 elevation: 10,
-                shape: Border(
+                shape: const Border(
                   top: BorderSide(
                     color: Color(0xFF276887),
                     width: 7,
@@ -164,8 +164,8 @@ class BodyState extends State<Body> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 20),
-                    Align(
+                    const SizedBox(height: 20),
+                    const Align(
                       alignment: Alignment.center,
                       child: Text(
                         'attitude',
@@ -179,7 +179,7 @@ class BodyState extends State<Body> {
                     SizedBox(height: 25),
                     Text(
                       attitude.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
@@ -195,7 +195,7 @@ class BodyState extends State<Body> {
               padding: EdgeInsets.all(10),
               child: Card(
                 elevation: 10,
-                shape: Border(
+                shape: const Border(
                   top: BorderSide(
                     color: Color(0xFF276887),
                     width: 7,
@@ -203,7 +203,7 @@ class BodyState extends State<Body> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Align(
                       alignment: Alignment.center,
                       child: Text(
@@ -277,7 +277,7 @@ class BodyState extends State<Body> {
               padding: EdgeInsets.all(10),
               child: Card(
                 elevation: 10,
-                shape: Border(
+                shape: const Border(
                   top: BorderSide(
                     color: Color(0xFF276887),
                     width: 7,
@@ -285,8 +285,8 @@ class BodyState extends State<Body> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 20),
-                    Align(
+                    const SizedBox(height: 20),
+                    const Align(
                       alignment: Alignment.center,
                       child: Text(
                         'note totale',
@@ -300,7 +300,7 @@ class BodyState extends State<Body> {
                     SizedBox(height: 25),
                     Text(
                       noteTotale.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.w600,
                         color: Colors.black,

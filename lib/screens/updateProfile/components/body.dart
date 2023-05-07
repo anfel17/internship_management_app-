@@ -1,10 +1,13 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:internship_management_system/provider/user.dart';
 import 'package:provider/provider.dart';
-
+import 'package:internship_management_system/dialog/my_dialog.dart';
+import 'package:internship_management_system/screens/myProfile/profile_screen.dart';
 import '../../../constants.dart';
+
 
 class Body extends StatefulWidget {
   static String routeName = "/UpdateProfileScreen";
@@ -45,8 +48,11 @@ class BodyState extends State<Body> {
         phoneController.text = data[0]['tel_etudiant'].toString();
         registerNumberController.text = data[0]['num_carte'].toString();
 
+      }
 
-      });
+      );
+
+
     } else {
       print("error");
     }
@@ -69,11 +75,14 @@ class BodyState extends State<Body> {
           'specialite':specialite});
 
     if (response.statusCode == 200) {
-      // Handle success case
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Account information updated successfully'),
-        ),
+      MyDialog.show(
+        context,
+        'profile updated successfuly',
+        '',
+        DialogType.success,
+            () {
+              Navigator.pushNamed(context, ProfileScreen.routeName);
+        },
       );
     } else {
       // Handle error case
