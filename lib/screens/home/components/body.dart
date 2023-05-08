@@ -18,6 +18,7 @@ class BodyState extends State<Body> {
   late UserProvider userProvider;
   late DateTime today;
   DateTime? _selectedDate;
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _dateDebController = TextEditingController();
   final TextEditingController _dateFinController = TextEditingController();
   List<dynamic> data = [];
@@ -174,6 +175,9 @@ class BodyState extends State<Body> {
                               ],
                             ),
                             children: [
+                            Form(
+                            key: _formKey,
+                              child:
                               ListTile(
                                 title: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,7 +187,7 @@ class BodyState extends State<Body> {
                                     Row(
                                       children: [
                                         Flexible(
-                                          child: TextField(
+                                          child: TextFormField(
                                             controller: _dateDebController,
                                             decoration: const InputDecoration(
                                               enabledBorder: UnderlineInputBorder(
@@ -198,11 +202,17 @@ class BodyState extends State<Body> {
                                             onTap: () {
                                               _selectDate(context, _dateDebController);
                                             },
+                                            validator: (value) {
+                                              if (value == null || value.isEmpty) {
+                                                return 'Please enter some text';
+                                              }
+                                              return null;
+                                            },
                                           ),
                                         ),
                                         SizedBox(width: 10),
                                         Flexible(
-                                          child: TextField(
+                                          child: TextFormField(
                                             controller: _dateFinController,
                                             decoration: const InputDecoration(
                                               enabledBorder: UnderlineInputBorder(
@@ -214,6 +224,12 @@ class BodyState extends State<Body> {
                                               labelText: 'end date',
                                               labelStyle: TextStyle(color: Colors.grey),
                                             ),
+                                            validator: (value) {
+                                              if (value == null || value.isEmpty) {
+                                                return 'Please enter some text';
+                                              }
+                                              return null;
+                                            },
                                             onTap: () {
                                               _selectDate(context, _dateFinController);
                                             },
@@ -227,8 +243,13 @@ class BodyState extends State<Body> {
                                       alignment: Alignment.centerRight,
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          print (data[i]['id_offre']);
-                                          applyforinternship(data[i]['id_offre'].toString(),_dateDebController.text,_dateFinController.text);
+                                       //   print (data[i]['id_offre']);
+                                       if (_formKey.currentState!.validate()) {
+                                         applyforinternship(
+                                             data[i]['id_offre'].toString(),
+                                             _dateDebController.text,
+                                             _dateFinController.text);
+                                       }
                                         },
                                         child: Text('send request'),
                                       ),
@@ -236,7 +257,7 @@ class BodyState extends State<Body> {
                                   ],
                                 ),
                               )
-
+                            )
                             ],
                           ),
                         ),

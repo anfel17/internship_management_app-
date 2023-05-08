@@ -3,6 +3,7 @@ import 'package:internship_management_system/screens/home/home_screen.dart';
 import 'package:internship_management_system/screens/myApplications/myApplication_screen.dart';
 import 'package:internship_management_system/screens/newApplication/newApplication.dart';
 import 'package:internship_management_system/screens/marks/marks_screen.dart';
+import 'package:internship_management_system/screens/myAttendance/attendance_screen.dart';
 import '../login/login_screen.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -122,6 +123,28 @@ class _NavDrawerState extends State<NavDrawer> {
             },
           ),
         ),
+              SizedBox(height: 10),
+              Card(
+                color: Colors.blueGrey[100],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text(
+                    'My attendance',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
+                  ),
+                  onTap: () {
+                    // userLogout();
+                    // Authentication.signOut(context: context);
+                    Navigator.pushNamed(context, AttendanceScreen.routeName);
+                  },
+                ),
+              ),
         const SizedBox(height: 10),
               Card(
                 color: Colors.blueGrey[100],

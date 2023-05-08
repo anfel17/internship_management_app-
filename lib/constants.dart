@@ -14,3 +14,10 @@ const applicationsList = baseUrl + 'applicationsList';
 const modifyApplication = baseUrl + 'modifyApplication';
 const checkMarks = baseUrl + 'checkMarks';
 const applyForInternship = baseUrl + 'applyForInternship';
+const consultAttendance = baseUrl + 'consultAttendance';
+
+const kPrimaryGradientColor = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [Color(0xFF276887), Color(0xFFFF7643)],
+);
