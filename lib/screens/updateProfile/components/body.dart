@@ -8,7 +8,6 @@ import 'package:internship_management_system/dialog/my_dialog.dart';
 import 'package:internship_management_system/screens/myProfile/profile_screen.dart';
 import '../../../constants.dart';
 
-
 class Body extends StatefulWidget {
   static String routeName = "/UpdateProfileScreen";
   @override
@@ -16,7 +15,7 @@ class Body extends StatefulWidget {
 }
 
 class BodyState extends State<Body> {
-
+  final _formKey = GlobalKey<FormState>();
   String userId = '';
   late UserProvider userProvider;
 
@@ -38,41 +37,46 @@ class BodyState extends State<Body> {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       setState(() {
-
         firstNameController.text = data[0]['nom_etudiant'];
-        lastNameController.text =  data[0]['prenom_etudiant'];
-        emailController.text =  data[0]['email'];
-        diplomaController.text =data[0]['diplome'];
-        specialityController.text =  data[0]['specialite'];
+        lastNameController.text = data[0]['prenom_etudiant'];
+        emailController.text = data[0]['email'];
+        diplomaController.text = data[0]['diplome'];
+        specialityController.text = data[0]['specialite'];
         birthPlaceController.text = data[0]['lieu_naissance'];
+        birthDateController.text= data[0]['date_naissance'];
         phoneController.text = data[0]['tel_etudiant'].toString();
         registerNumberController.text = data[0]['num_carte'].toString();
-
-      }
-
-      );
-
-
+      });
     } else {
       print("error");
     }
   }
-  void modifyAccount(String name,String lastname,String email,String birthPlace,
-      String diplome,String specialite,String tel,String cardNumber) async {
+
+  void modifyAccount(
+      String name,
+      String lastname,
+      String email,
+      String birthPlace,
+      String diplome,
+      String specialite,
+      String tel,
+      String cardNumber,
+      String birthDate) async {
     // Call the modifyStudentAccount API endpoint with the updated name value
     Uri url = Uri.parse(modifyStudentAccount);
-    var response = await http.post(url,
-        body: {'id': userId,
-          'email': email,
-          'firstName': name,
-          'lastName': lastname,
-          "currentPassword":"0000",
-          "birthDate":"20-02-21",
-          'birthPlace':birthPlace,
-          'tel':tel,
-          'cardNumber':cardNumber,
-          'diplome':diplome,
-          'specialite':specialite});
+    var response = await http.post(url, body: {
+      'id': userId,
+      'email': email,
+      'firstName': name,
+      'lastName': lastname,
+      "currentPassword": "0000",
+      'birthDate': birthDate,
+      'birthPlace': birthPlace,
+      'tel': tel,
+      'cardNumber': cardNumber,
+      'diplome': diplome,
+      'specialite': specialite
+    });
 
     if (response.statusCode == 200) {
       MyDialog.show(
@@ -80,8 +84,8 @@ class BodyState extends State<Body> {
         'profile updated successfuly',
         '',
         DialogType.success,
-            () {
-              Navigator.pushNamed(context, ProfileScreen.routeName);
+        () {
+          Navigator.pushNamed(context, ProfileScreen.routeName);
         },
       );
     } else {
@@ -94,7 +98,6 @@ class BodyState extends State<Body> {
       );
     }
   }
-
 
   @override
   void initState() {
@@ -109,50 +112,73 @@ class BodyState extends State<Body> {
     return Container(
         padding: EdgeInsets.all(20),
         child: SingleChildScrollView(
+            child: Form(
+          key: _formKey,
           child: Column(
             children: [
               SizedBox(height: 15.0),
-              TextField(
-              controller: firstNameController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'First Name',
+              TextFormField(
+                controller: firstNameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'First Name',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'this field is required';
+                  }
+                },
               ),
-            ),
               SizedBox(height: 15.0),
-              TextField(
+              TextFormField(
                 controller: lastNameController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Last Name',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'this field is required';
+                  }
+                },
               ),
               SizedBox(height: 15.0),
-              TextField(
+              TextFormField(
                 controller: emailController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'email',
                 ),
+
               ),
               SizedBox(height: 15.0),
-              TextField(
+              TextFormField(
                 controller: phoneController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Phone',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'this field is required';
+                  }
+                },
               ),
               SizedBox(height: 15.0),
-              TextField(
+              TextFormField(
                 controller: birthPlaceController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'birth place',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'this field is required';
+                  }
+                },
               ),
               SizedBox(height: 15.0),
-              TextField(
+              TextFormField(
                 controller: birthDateController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -160,53 +186,70 @@ class BodyState extends State<Body> {
                 ),
               ),
               SizedBox(height: 15.0),
-              TextField(
+              TextFormField(
                 controller: diplomaController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Diploma',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'this field is required';
+                  }
+                },
               ),
               SizedBox(height: 15.0),
-              TextField(
+              TextFormField(
                 controller: registerNumberController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Registration Number',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'this field is required';
+                  }
+                },
               ),
               SizedBox(height: 15.0),
-              TextField(
+              TextFormField(
                 controller: specialityController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'speciality',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'this field is required';
+                  }
+                },
               ),
               SizedBox(height: 15.0),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    modifyAccount(firstNameController.text,
-                        lastNameController.text,
-                        emailController.text,
-                        birthPlaceController.text,
-                        diplomaController.text,
-                        specialityController.text,
-                        phoneController.text,
-                        registerNumberController.text
-
-                        );
+                    if (_formKey.currentState!.validate()) {
+                      modifyAccount(
+                          firstNameController.text,
+                          lastNameController.text,
+                          emailController.text,
+                          birthPlaceController.text,
+                          diplomaController.text,
+                          specialityController.text,
+                          phoneController.text,
+                          registerNumberController.text,
+                          birthDateController.text);
+                    }
                   },
                   child: Text('Update'),
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF3A96B4)),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xFF3A96B4)),
                   ),
                 ),
               ),
             ],
           ),
-        )
-    );
+        )));
   }
 }
