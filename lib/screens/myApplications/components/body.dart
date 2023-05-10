@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:internship_management_system/screens/myApplications/applicationDetailsScreen.dart';
 import 'dart:convert';
@@ -53,11 +54,12 @@ class BodyState extends State<Body> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+           Text(
             'Applications',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.poppins(
+              fontSize: 25,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
             ),
           ),
           SizedBox(height: 10),
@@ -71,8 +73,10 @@ class BodyState extends State<Body> {
                       color: Colors.lightBlue[50],
                       elevation: 8,
                       child: ListTile(
-                        title: Text(data[index]['theme']),
-                        subtitle: Text('Tap to view details'),
+                        title: Text(data[index]['theme'],style: TextStyle(fontSize: 17,fontWeight: FontWeight.w400)),
+                        subtitle: data[index]['motif'] != null
+                            ? Text('check your motif',style: TextStyle(color: Colors.red,),)
+                            : null,
                         trailing: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),

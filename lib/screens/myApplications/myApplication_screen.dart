@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:internship_management_system/screens/drawer/navDrawer.dart';
 import 'package:internship_management_system/screens/bottomNavBar/bottomNavBar.dart';
 import 'package:internship_management_system/screens/notifications/notification_screen.dart';
@@ -18,7 +19,11 @@ class ApplicationScreen extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
             ),
-            child: Text("Internify")
+            child: Text("Internify", style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+              color:Colors.lightBlue[50],
+            ),)
         ),
           ),
       drawer: NavDrawer(),

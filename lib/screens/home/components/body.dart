@@ -36,6 +36,7 @@ class BodyState extends State<Body> {
       });
     }
   }
+
   Future<void> getData() async {
     String myUrl = consultOffersList;
     http.Response response = await http.get(Uri.parse(myUrl));
