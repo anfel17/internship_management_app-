@@ -297,7 +297,7 @@ class _applicationDetailsScreenState extends State<applicationDetailsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(),
+        bottomNavigationBar: MyBottomNavigationBar(selectedIndex: 0)
     );
   }
 }

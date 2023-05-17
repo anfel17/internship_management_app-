@@ -27,7 +27,7 @@ class AttendanceScreen extends StatelessWidget {
       ),
       drawer: NavDrawer(),
       body: Body(),
-      bottomNavigationBar: MyBottomNavigationBar(),
+        bottomNavigationBar: MyBottomNavigationBar(selectedIndex: 0)
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../constants.dart';
 import 'package:internship_management_system/provider/user.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class Body extends StatefulWidget {
 }
 class BodyState extends State<Body> {
   String name = "";
+  String img="";
   String email = "";
   String diplome = "";
   String specialite = "";
@@ -22,6 +24,8 @@ class BodyState extends State<Body> {
   String lieu_naissance = "";
   String nom_departement = "";
   String userId = '';
+  final ImagePicker picker = ImagePicker();
+
   late UserProvider userProvider;
 
   Future<void> getStudentAccount(String userId) async {
@@ -40,6 +44,7 @@ class BodyState extends State<Body> {
         lieu_naissance = data[0]['lieu_naissance'];
         // date_naissance = data[0]['date_naissance'];
         nom_departement = data[0]['nom_departement'];
+        img = data[0]['photo_etudiant'];
       });
     } else {
       print("error");
@@ -78,9 +83,16 @@ class BodyState extends State<Body> {
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     CircleAvatar(
                       radius: 52,
-                      backgroundImage: AssetImage('assets/images/graduate.png'),
+                      backgroundImage:  NetworkImage(img)
                     ),
                   ]),
+                  FloatingActionButton(
+                    onPressed: () async {
+                      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+                      // do something with the picked file
+                    },
+                    child: Icon(Icons.add),
+                  ),
                   SizedBox(
                     height: 10,
                   ),

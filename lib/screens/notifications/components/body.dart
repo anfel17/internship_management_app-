@@ -45,14 +45,20 @@ class BodyState extends State<Body> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          Row(children: [CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 18,
+            backgroundImage: AssetImage('assets/images/notification.png'),
+          ),
+            SizedBox(width: 10),Text(
             'Notifications',
             style: GoogleFonts.poppins(
               fontSize: 25,
               fontWeight: FontWeight.w600,
               color: Colors.black,
             ),
-          ),
+          ),],),
+
           SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
@@ -61,16 +67,26 @@ class BodyState extends State<Body> {
                 return Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: Card(
-                    color: Colors.lightBlue[50],
                     elevation: 10,
-                    child: ListTile(
+                child: Container(
+                decoration: BoxDecoration(
+                gradient: LinearGradient(
+                colors: [
+                Colors.lightBlue[100]!,
+                Colors.lightBlue[50]!,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                ),
+                ),
+                child: ListTile(
                       title: Text(data[index]['message'] ?? ''),
                       subtitle: Text(
                           DateFormat.yMMMMd().format(DateTime.parse(data[index]['timeStamp']))),
                       leading: Icon(Icons.notifications),
                     ),
                   ),
-                );
+                ));
               },
             ),
           ),

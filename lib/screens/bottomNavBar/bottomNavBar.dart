@@ -10,11 +10,15 @@ import 'package:provider/provider.dart';
 
 
 class MyBottomNavigationBar extends StatefulWidget {
+  final int selectedIndex;
+
+  MyBottomNavigationBar({required this.selectedIndex});
   @override
   _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
 }
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
+  int _selectedIndex = 0;
   String userId='';
   late UserProvider userProvider;
   int unseenStudentNotif=0;
@@ -48,90 +52,90 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     userProvider = Provider.of<UserProvider>(context, listen: false);
     userId = userProvider.userId;
     getUnseenNotifCount(userId);
+    _selectedIndex = widget.selectedIndex;
   }
-  int _selectedIndex = 0;
+
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+     _selectedIndex = index;
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    return
-      BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-            BottomNavigationBarItem(
-              icon: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, NotificationsScreen.routeName);
-                },
-                child: Stack(
-                  children: [
-                    Icon(Icons.notifications),
-                    if (unseenStudentNotif != 0)
-                      Positioned(
-                        right: -0.75,
-                        top: -1,
-                        child: Container(
-                          padding: EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(6),
+
+    Widget build(BuildContext context) {
+      return BottomNavigationBar(
+
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, NotificationsScreen.routeName);
+              },
+              child: Stack(
+                children: [
+                  Icon(Icons.notifications),
+                  if (unseenStudentNotif != 0)
+                    Positioned(
+                      right: -0.75,
+                      top: -1,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        constraints: BoxConstraints(
+                          minWidth:11,
+                          minHeight: 11,
+                        ),
+                        child: Text(
+                          '$unseenStudentNotif',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
                           ),
-                          constraints: BoxConstraints(
-                            minWidth:11,
-                            minHeight: 11,
-                          ),
-                          child: Text(
-                            '$unseenStudentNotif',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
-              label: 'Notifications',
             ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blue,
-          onTap: (index) {
-    setState(() {
-    _selectedIndex = index;
-    });
-    if (index == 2) {
-      updateNotifications();
-    Navigator.pushNamed(context, NotificationsScreen.routeName);
-    } else if (index == 1) {
-    Navigator.pushNamed(context, ProfileScreen.routeName);
-    } else if (index == 0) {
-    Navigator.pushNamed(context, HomeScreen.routeName);
-    }
-    },);
+            label: 'Notifications',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.deepOrangeAccent,
+        selectedLabelStyle: TextStyle(color: Colors.deepOrangeAccent),
+        unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          if (index == 2) {
+            updateNotifications();
+            Navigator.pushNamed(context, NotificationsScreen.routeName);
+          } else if (index == 1) {
+            Navigator.pushNamed(context, ProfileScreen.routeName);
+          } else if (index == 0) {
+            Navigator.pushNamed(context, HomeScreen.routeName);
+          }
+        },
+      );
 
   }
-}
 
 
 
-
-
-
-
-
+  }
 

@@ -57,7 +57,7 @@ class _NavDrawerState extends State<NavDrawer> {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF276887),Colors.lightBlue[50]!, Color(0xFF276887)],
+            colors: [Color(0xFF276887) ,Colors.lightBlue[50]!],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -163,7 +163,6 @@ class _NavDrawerState extends State<NavDrawer> {
           child:
             Align(
               alignment: Alignment.bottomRight,
-
 
                 child:ListTile(
                   leading: Text(

@@ -4,6 +4,7 @@ import 'package:internship_management_system/screens/myApplications/myApplicatio
 import 'package:internship_management_system/screens/notifications/notification_screen.dart';
 import 'package:internship_management_system/screens/newApplication/newApplication.dart';
 import 'package:internship_management_system/screens/myProfile/profile_screen.dart';
+import 'package:internship_management_system/screens/splash/splash_screen.dart';
 import 'package:internship_management_system/screens/updateProfile/update_profile_screen.dart';
 import 'package:internship_management_system/screens/login/login_screen.dart';
 import 'package:internship_management_system/screens/myApplications/applicationDetailsScreen.dart';
@@ -21,6 +22,8 @@ final Map<String, WidgetBuilder> routes = {
    LoginPage.routeName: (context) => LoginPage(),
    MarksScreen.routeName: (context) => MarksScreen(),
    AttendanceScreen.routeName: (context) => AttendanceScreen(),
+   MyCustomWidget.routeName: (context) => MyCustomWidget(),
+
   // applicationDetailsScreen.routeName: (context) => applicationDetailsScreen(data: data),
 
 };

@@ -122,7 +122,7 @@ class BodyState extends State<Body> {
                 child: Column(
                   children: [
                     SizedBox(height: 20),
-                    Align(
+                    const Align(
                       alignment: Alignment.center,
                       child: Text(
                         'discipline',

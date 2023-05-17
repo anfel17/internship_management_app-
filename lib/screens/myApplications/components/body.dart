@@ -75,7 +75,7 @@ class BodyState extends State<Body> {
                       child: ListTile(
                         title: Text(data[index]['theme'],style: TextStyle(fontSize: 17,fontWeight: FontWeight.w400)),
                         subtitle: data[index]['motif'] != null
-                            ? Text('check your motif',style: TextStyle(color: Colors.red,),)
+                            ? Text('check motif',style: TextStyle(color: Colors.red,),)
                             : null,
                         trailing: Container(
                           decoration: BoxDecoration(

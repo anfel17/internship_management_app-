@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:internship_management_system/routes.dart';
-import 'package:internship_management_system/screens/home/home_screen.dart';
 import 'package:internship_management_system/screens/login/login_screen.dart';
+
 import 'package:flutter/material.dart';
+import 'package:internship_management_system/screens/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:internship_management_system/provider/user.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        initialRoute: LoginPage.routeName,
+        initialRoute: MyCustomWidget.routeName,
         routes: routes,
       ),
     );

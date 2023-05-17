@@ -23,7 +23,8 @@ class BodyState extends State<Body> {
   final TextEditingController _dateFinController = TextEditingController();
   List<dynamic> data = [];
 
-  void _selectDate(BuildContext context, TextEditingController controller) async {
+  void _selectDate(
+      BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: today,
@@ -46,12 +47,14 @@ class BodyState extends State<Body> {
     });
   }
 
-  Future<void> applyforinternship(String idOffre,String dateD, String dateF) async {
+  Future<void> applyforinternship(
+      String idOffre, String dateD, String dateF) async {
     Uri url = Uri.parse(applyForInternship);
-    var response = await http.post(url, body: {'idStudent': userId,
-    'idOffre':idOffre,
-      'dateD':dateD,
-      'dateF':dateF
+    var response = await http.post(url, body: {
+      'idStudent': userId,
+      'idOffre': idOffre,
+      'dateD': dateD,
+      'dateF': dateF
     });
     if (response.statusCode == 200) {
       // Handle success case
@@ -142,13 +145,27 @@ class BodyState extends State<Body> {
                 ),
               ),
               SizedBox(height: 15),
-              Text(
-                'Internships List',
-                style: GoogleFonts.poppins(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
+              Row(
+                children: [
+                  Container(
+                    child: Image.asset(
+                      'assets/images/list.png',
+                      width: 25,
+                      height: 23,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 7,
+                  ),
+                  Text(
+                    'Internships List',
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 10),
               Expanded(
@@ -158,111 +175,161 @@ class BodyState extends State<Body> {
                     return Column(
                       children: [
                         Card(
-                          color: Colors.lightBlue[50],
-                          elevation: 10,
-                          child: ExpansionTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(data[i]['theme']),
-                                SizedBox(height: 5),
-                              ],
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 5),
-                                Text("duree: ${data[i]['duree']}"),
-                              ],
-                            ),
-                            children: [
-                            Form(
-                            key: _formKey,
-                              child:
-                              ListTile(
+                            elevation: 10,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.lightBlue[100]!,
+                                    Colors.lightBlue[50]!,
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                              child: ExpansionTile(
                                 title: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(data[i]['description']),
-                                    SizedBox(height: 10),
                                     Row(
                                       children: [
-                                        Flexible(
-                                          child: TextFormField(
-                                            controller: _dateDebController,
-                                            decoration: const InputDecoration(
-                                              enabledBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(color: Colors.grey),
-                                              ),
-                                              focusedBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(color: Colors.blue),
-                                              ),
-                                              labelText: 'start date',
-                                              labelStyle: TextStyle(color: Colors.grey),
-                                            ),
-                                            onTap: () {
-                                              _selectDate(context, _dateDebController);
-                                            },
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter some text';
-                                              }
-                                              return null;
-                                            },
-                                          ),
+                                        Container(
+                                          child:CircleAvatar(
+                                    radius: 30,
+                                    backgroundImage:AssetImage(
+                                        'assets/images/tlc.png')
+                                ),
                                         ),
-                                        SizedBox(width: 10),
-                                        Flexible(
-                                          child: TextFormField(
-                                            controller: _dateFinController,
-                                            decoration: const InputDecoration(
-                                              enabledBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(color: Colors.grey),
-                                              ),
-                                              focusedBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(color: Colors.blue),
-                                              ),
-                                              labelText: 'end date',
-                                              labelStyle: TextStyle(color: Colors.grey),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter some text';
-                                              }
-                                              return null;
-                                            },
-                                            onTap: () {
-                                              _selectDate(context, _dateFinController);
-                                            },
-                                          ),
-
+                                        SizedBox(width: 5),
+                                        Text(
+                                          data[i]['theme'],
+                                          style: TextStyle(color: Colors.black),
                                         ),
+                                        SizedBox(height: 5),
                                       ],
-                                    ),
-                                    SizedBox(height:30 ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                       //   print (data[i]['id_offre']);
-                                       if (_formKey.currentState!.validate()) {
-                                         applyforinternship(
-                                             data[i]['id_offre'].toString(),
-                                             _dateDebController.text,
-                                             _dateFinController.text);
-                                       }
-                                        },
-                                        child: Text('send request'),
-                                      ),
+                                    )
+                                  ],
+                                ),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 5),
+                                    Text(
+                                      "duree: ${data[i]['duree']}",
+                                      style: TextStyle(color: Colors.black),
                                     ),
                                   ],
                                 ),
-                              )
-                            )
-                            ],
-                          ),
-                        ),
-
+                                children: [
+                                  Form(
+                                      key: _formKey,
+                                      child: ListTile(
+                                        title: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(data[i]['description']),
+                                            SizedBox(height: 10),
+                                            Row(
+                                              children: [
+                                                Flexible(
+                                                  child: TextFormField(
+                                                    controller:
+                                                        _dateDebController,
+                                                    decoration:
+                                                        const InputDecoration(
+                                                      enabledBorder:
+                                                          UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.grey),
+                                                      ),
+                                                      focusedBorder:
+                                                          UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.blue),
+                                                      ),
+                                                      labelText: 'start date',
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.grey),
+                                                    ),
+                                                    onTap: () {
+                                                      _selectDate(context,
+                                                          _dateDebController);
+                                                    },
+                                                    validator: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'this field is required';
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Flexible(
+                                                  child: TextFormField(
+                                                    controller:
+                                                        _dateFinController,
+                                                    decoration:
+                                                        const InputDecoration(
+                                                      enabledBorder:
+                                                          UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.grey),
+                                                      ),
+                                                      focusedBorder:
+                                                          UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.blue),
+                                                      ),
+                                                      labelText: 'end date',
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.grey),
+                                                    ),
+                                                    validator: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'this field is required';
+                                                      }
+                                                    },
+                                                    onTap: () {
+                                                      _selectDate(context,
+                                                          _dateFinController);
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 30),
+                                            Align(
+                                              alignment: Alignment.centerRight,
+                                              child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                              Color>(
+                                                          Color(0xFFFA6800)),
+                                                ),
+                                                onPressed: () {
+                                                  //   print (data[i]['id_offre']);
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    applyforinternship(
+                                                        data[i]['id_offre']
+                                                            .toString(),
+                                                        _dateDebController.text,
+                                                        _dateFinController
+                                                            .text);
+                                                  }
+                                                },
+                                                child: Text('send request'),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ))
+                                ],
+                              ),
+                            )),
                         SizedBox(height: 10),
                       ],
                     );
@@ -287,4 +354,3 @@ class BodyState extends State<Body> {
     );
   }
 }
-
