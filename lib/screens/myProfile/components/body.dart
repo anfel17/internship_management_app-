@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../constants.dart';
 import 'package:internship_management_system/provider/user.dart';
 import 'package:provider/provider.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 class Body extends StatefulWidget {
   @override
@@ -24,7 +24,6 @@ class BodyState extends State<Body> {
   String lieu_naissance = "";
   String nom_departement = "";
   String userId = '';
-  final ImagePicker picker = ImagePicker();
 
   late UserProvider userProvider;
 
@@ -44,7 +43,9 @@ class BodyState extends State<Body> {
         lieu_naissance = data[0]['lieu_naissance'];
         // date_naissance = data[0]['date_naissance'];
         nom_departement = data[0]['nom_departement'];
-        img = data[0]['photo_etudiant'];
+        String imagePath = data[0]['photo_etudiant'];
+        img = 'http://192.168.1.12:8000/' + imagePath;
+        print(img);
       });
     } else {
       print("error");
@@ -82,17 +83,21 @@ class BodyState extends State<Body> {
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     CircleAvatar(
-                      radius: 52,
-                      backgroundImage:  NetworkImage(img)
+                        radius: 52,
+                        backgroundImage: AssetImage('assets/images/graduate.png'),
                     ),
-                  ]),
-                  FloatingActionButton(
-                    onPressed: () async {
-                      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-                      // do something with the picked file
-                    },
-                    child: Icon(Icons.add),
-                  ),
+
+
+
+
+        ]),
+                  // FloatingActionButton(
+                  //   onPressed: () async {
+                  //     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+                  //     // do something with the picked file
+                  //   },
+                  //   child: Icon(Icons.add),
+                  // ),
                   SizedBox(
                     height: 10,
                   ),

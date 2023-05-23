@@ -146,18 +146,34 @@ class _LoginPageState extends State<LoginPage> {
                     );
                   }
                 },
-                style: ButtonStyle( backgroundColor: MaterialStateProperty.all(Color(0xFF276887)),),
+
+               style: ButtonStyle( elevation: MaterialStateProperty.all(0), backgroundColor: MaterialStateProperty.all(Colors.transparent),),
 
                 child: Container(
                   alignment: Alignment.center,
                   height: 50.0,
                   width: size.width * 0.5,
                   padding: const EdgeInsets.all(0),
-                  child: Text(
-                    "LOGIN",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 50.0,
+                    width: size.width * 0.5,
+                    decoration: new BoxDecoration(
+                        borderRadius: BorderRadius.circular(80.0),
+                        gradient: new LinearGradient(
+                            colors: [
+                              Color.fromARGB(255, 255, 136, 34),
+                              Color.fromARGB(255, 255, 177, 41)
+                            ]
+                        )
+                    ),
+                    padding: const EdgeInsets.all(0),
+                    child: Text(
+                      "LOGIN",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
                 ),

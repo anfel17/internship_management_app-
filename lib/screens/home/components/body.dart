@@ -23,6 +23,12 @@ class BodyState extends State<Body> {
   final TextEditingController _dateFinController = TextEditingController();
   List<dynamic> data = [];
 
+  List<String> imagePaths = [
+    'assets/images/tlc.png',
+    'assets/images/offre.jpg',
+    'assets/images/image3.png',
+  ];
+
   void _selectDate(
       BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -196,8 +202,9 @@ class BodyState extends State<Body> {
                                         Container(
                                           child:CircleAvatar(
                                     radius: 30,
-                                    backgroundImage:AssetImage(
-                                        'assets/images/tlc.png')
+                                            backgroundImage: AssetImage(
+                                              imagePaths[i % imagePaths.length],  // Set the background image based on the index
+                                            ),
                                 ),
                                         ),
                                         SizedBox(width: 5),

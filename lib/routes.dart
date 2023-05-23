@@ -22,7 +22,7 @@ final Map<String, WidgetBuilder> routes = {
    LoginPage.routeName: (context) => LoginPage(),
    MarksScreen.routeName: (context) => MarksScreen(),
    AttendanceScreen.routeName: (context) => AttendanceScreen(),
-   MyCustomWidget.routeName: (context) => MyCustomWidget(),
+   SplashScreen.routeName: (context) => SplashScreen(),
 
   // applicationDetailsScreen.routeName: (context) => applicationDetailsScreen(data: data),
 
