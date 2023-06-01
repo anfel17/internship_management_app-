@@ -17,13 +17,11 @@ class NavDrawer extends StatefulWidget {
   State<NavDrawer> createState() => _NavDrawerState();
 }
 
-
 class _NavDrawerState extends State<NavDrawer> {
   String userId = '';
   late UserProvider userProvider;
   String name = "";
   String email = "";
-
 
   Future<void> getStudentAccount(String userId) async {
     Uri url = Uri.parse(consultStudentAccount);
@@ -40,7 +38,6 @@ class _NavDrawerState extends State<NavDrawer> {
     }
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -49,15 +46,13 @@ class _NavDrawerState extends State<NavDrawer> {
     getStudentAccount(userId);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF276887) ,Colors.lightBlue[50]!],
+            colors: [Color(0xFF276887), Colors.lightBlue[50]!],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -67,23 +62,40 @@ class _NavDrawerState extends State<NavDrawer> {
             const SizedBox(height: 15),
             Align(
               alignment: Alignment.centerLeft,
-
               child: Container(
-                width: 100,
-                height: 150,
-                margin: const EdgeInsets.only(
-                  top: 30,
-                  left: 15,
-                ),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/graduate.png'),
+                  // width: 100,
+                  // height: 150,
+                  margin: const EdgeInsets.only(
+                    top: 60,
+                    left: 15,
                   ),
-                ),
-              ),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 52,
+                        backgroundImage: AssetImage(
+                            'assets/images/cheerful-student-posing-against-pink-wall-fotor-bg-remover-20230601152110.png'),
+                      ),
+                     SizedBox(width:20),
+                      Text(
+                        name,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                        ),
+                      )
+                    ],
+                  )
+                  // decoration: const BoxDecoration(
+                  //   shape: BoxShape.circle,
+                  //   image: DecorationImage(
+                  //     image: AssetImage('assets/images/cheerful-student-posing-against-pink-wall-fotor-bg-remover-20230601152110.png'),
+                  //   ),
+                  // ),
+                  ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 40),
             ListTile(
               leading: Icon(Icons.home_filled),
               title: const Text(
@@ -153,18 +165,16 @@ class _NavDrawerState extends State<NavDrawer> {
                 Navigator.pushNamed(context, AttendanceScreen.routeName);
               },
             ),
-        Container(
-          // width: 100,
-          // height: 300,
-          margin: const EdgeInsets.only(
-            top: 200,
-            left: 150,
-          ),
-          child:
-            Align(
-              alignment: Alignment.bottomRight,
-
-                child:ListTile(
+            Container(
+              // width: 100,
+              // height: 300,
+              margin: const EdgeInsets.only(
+                top: 200,
+                left: 150,
+              ),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: ListTile(
                   leading: Text(
                     'logout',
                     style: TextStyle(
@@ -177,18 +187,12 @@ class _NavDrawerState extends State<NavDrawer> {
                     Navigator.pushNamed(context, LoginPage.routeName);
                   },
                 ),
-
+              ),
             ),
-        ),
             const SizedBox(height: 10),
           ],
         ),
       ),
     );
-
-
-
-
   }
-
 }

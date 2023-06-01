@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:internship_management_system/screens/newApplication/newApplication.dart';
 import 'package:http/http.dart' as http;
@@ -7,6 +8,9 @@ import '../../../constants.dart';
 import '../../../provider/user.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:internship_management_system/dialog/my_dialog.dart';
+
+import '../home_screen.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -63,11 +67,14 @@ class BodyState extends State<Body> {
       'dateF': dateF
     });
     if (response.statusCode == 200) {
-      // Handle success case
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Application information updated successfully'),
-        ),
+      MyDialog.show(
+        context,
+        'Request sent successfully',
+        '',
+        DialogType.success,
+            () {
+          Navigator.pushNamed(context, HomeScreen.routeName);
+        },
       );
     } else {
       // Handle error case
@@ -210,7 +217,7 @@ class BodyState extends State<Body> {
                                         SizedBox(width: 5),
                                         Text(
                                           data[i]['theme'],
-                                          style: TextStyle(color: Colors.black),
+                                          style: TextStyle(color: Colors.black,fontSize: 17,fontWeight: FontWeight.w500),
                                         ),
                                         SizedBox(height: 5),
                                       ],
@@ -310,11 +317,24 @@ class BodyState extends State<Body> {
                                             Align(
                                               alignment: Alignment.centerRight,
                                               child: ElevatedButton(
-                                                style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all<
-                                                              Color>(
-                                                          Color(0xFFFA6800)),
+                                                style:ButtonStyle( elevation: MaterialStateProperty.all(0), backgroundColor: MaterialStateProperty.all(Colors.transparent),),
+                                                child:Container(
+                                                  alignment: Alignment.center,
+                                                  height: 40.0,
+                                                  width: 100,
+                                                  decoration:  BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(10.0),
+                                                      gradient: const LinearGradient(
+                                                          colors: [
+                                                            Colors.deepOrangeAccent,
+                                                            Color.fromARGB(255, 255, 136, 34),
+                                                            Color.fromARGB(255, 255, 177, 41)
+                                                          ]
+                                                      )
+                                                  ),
+                                                  child: Text("send request",style: TextStyle(color: Colors.white,fontSize: 14),),
+                                                  padding: const EdgeInsets.all(0),
+
                                                 ),
                                                 onPressed: () {
                                                   //   print (data[i]['id_offre']);
@@ -328,7 +348,7 @@ class BodyState extends State<Body> {
                                                             .text);
                                                   }
                                                 },
-                                                child: Text('send request'),
+
                                               ),
                                             ),
                                           ],

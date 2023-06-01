@@ -7,14 +7,14 @@ import '../../../constants.dart';
 import 'package:internship_management_system/provider/user.dart';
 import 'package:provider/provider.dart';
 
-
 class Body extends StatefulWidget {
   @override
   State<Body> createState() => BodyState();
 }
+
 class BodyState extends State<Body> {
   String name = "";
-  String img="";
+  String img = "";
   String email = "";
   String diplome = "";
   String specialite = "";
@@ -79,18 +79,16 @@ class BodyState extends State<Body> {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
-               // crossAxisAlignment: CrossAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     CircleAvatar(
-                        radius: 52,
-                        backgroundImage: AssetImage('assets/images/graduate.png'),
+                      radius: 52,
+                      backgroundImage: AssetImage(
+                          'assets/images/cheerful-student-posing-against-pink-wall-fotor-bg-remover-20230601152110.png'),
                     ),
 
-
-
-
-        ]),
+                  ]),
                   // FloatingActionButton(
                   //   onPressed: () async {
                   //     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -101,21 +99,20 @@ class BodyState extends State<Body> {
                   SizedBox(
                     height: 10,
                   ),
-                      Text(
-                        name,
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
+                  Text(
+                    name,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,
+                  ),
                   Text(
                     email,
                     style: TextStyle(color: Colors.white, fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
-
                 ],
               ),
             ),
-            const SizedBox(height:10 ),
+            const SizedBox(height: 10),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -260,19 +257,35 @@ class BodyState extends State<Body> {
                                 ),
                               ),
                               Center(
-                                child: ElevatedButton(
+                               child:
+                                ElevatedButton(
+                                  style:ButtonStyle( elevation: MaterialStateProperty.all(0), backgroundColor: MaterialStateProperty.all(Colors.transparent),),
+                                  child:Container(
+                                    alignment: Alignment.center,
+                                    height: 40.0,
+                                    width: 100,
+                                    decoration:  BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        gradient: const LinearGradient(
+                                            colors: [
+                                              Colors.deepOrangeAccent,
+                                              Color.fromARGB(255, 255, 136, 34),
+                                              Color.fromARGB(255, 255, 177, 41)
+                                            ]
+                                        )
+                                    ),
+                                    child: Text("update",style: TextStyle(color: Colors.white,fontSize: 14),),
+                                    padding: const EdgeInsets.all(0),
+
+                                  ),
                                   onPressed: () {
                                     Navigator.pushNamed(
                                         context, UpdateProfileScreen.routeName);
                                   },
-                                  child: Text('Update'),
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Color(0xFF3A96B4)),
-                                  ),
+
                                 ),
-                              )
+                              ),
+                              SizedBox(height: 20,)
                             ],
                           ),
                         ),
