@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:internship_management_system/screens/drawer/navDrawer.dart';
 import 'package:internship_management_system/screens/bottomNavBar/bottomNavBar.dart';
@@ -7,6 +8,9 @@ import '../../constants.dart';
 import 'package:internship_management_system/provider/user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:internship_management_system/dialog/my_dialog.dart';
+
+import 'myApplication_screen.dart';
 
 class applicationDetailsScreen extends StatefulWidget {
   static String routeName = "/applicationDetailsScreen";
@@ -28,6 +32,9 @@ class _applicationDetailsScreenState extends State<applicationDetailsScreen> {
   late TextEditingController entrNameController;
   late TextEditingController adrsController;
   late TextEditingController telController;
+  late TextEditingController dateDebController;
+  late TextEditingController dateFinController;
+
   late int idStage;
   late UserProvider userProvider;
   final _formKey = GlobalKey<FormState>();
@@ -40,13 +47,15 @@ class _applicationDetailsScreenState extends State<applicationDetailsScreen> {
       String resLastName,
       String entrName,
       String adrs,
-      String tel) async {
+      String tel,
+      String dateD,
+      String dateF) async {
     Uri url = Uri.parse(modifyApplication);
     var response = await http.post(url, body: {
       'id': idStage,
       "theme": theme,
-      "dateD": "10-02-10",
-      "dateF": "10-02-20",
+      "dateD": dateD,
+      "dateF": dateF,
       "duree": "10",
       "description": "test",
       "deadline": "10-02-20",
@@ -61,38 +70,16 @@ class _applicationDetailsScreenState extends State<applicationDetailsScreen> {
     if (response.statusCode == 200) {
       if (widget.data['etat_responsable'] == "refuse" ||
           widget.data['etat_chef'] != "accepte") {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Success'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.check_circle,
-                    color: Colors.green,
-                    size: 30,
-                  ),
-                  SizedBox(height: 10),
-                  Text('App information updated successfully'),
-                ],
-              ),
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              actions: [
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
+        MyDialog.show(
+          context,
+          'information updated successfuly',
+          '',
+          DialogType.success,
+              () {
+            Navigator.pushNamed(context, ApplicationScreen.routeName);
           },
         );
       } else {
-        // Handle error ca
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -138,6 +125,8 @@ class _applicationDetailsScreenState extends State<applicationDetailsScreen> {
         TextEditingController(text: widget.data['addresse_entreprise']);
     telController =
         TextEditingController(text: widget.data['tel_entreprise'].toString());
+    dateDebController = TextEditingController(text: widget.data['date_debut'].toString());
+    dateFinController = TextEditingController(text: widget.data['date_fin'].toString());
   }
 
   @override
@@ -268,6 +257,36 @@ class _applicationDetailsScreenState extends State<applicationDetailsScreen> {
                   },
                 ),
                 SizedBox(height: 15.0),
+
+                  TextFormField(
+                  controller: dateDebController,
+                  // enabled: widget.data['createur'] == "etudiant",
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'start date',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'this field is required';
+                    }
+                  },
+                ),
+                SizedBox(height: 15.0),
+                  TextFormField(
+                    controller: dateFinController,
+                    // enabled: widget.data['createur'] == "etudiant",
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'end date',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'this field is required';
+                      }
+                    },
+                  ),
+
+                SizedBox(height: 15.0),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
@@ -282,7 +301,9 @@ class _applicationDetailsScreenState extends State<applicationDetailsScreen> {
                             resLastNameController.text,
                             entrNameController.text,
                             adrsController.text,
-                            telController.text);
+                            telController.text,
+                            dateDebController.text,
+                            dateFinController.text);
                       }
                     },
                     child: Text('Update'),
@@ -301,3 +322,4 @@ class _applicationDetailsScreenState extends State<applicationDetailsScreen> {
     );
   }
 }
+

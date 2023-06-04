@@ -29,8 +29,10 @@ class BodyState extends State<Body> {
 
   List<String> imagePaths = [
     'assets/images/tlc.png',
+    'assets/images/newpreview.jpg',
     'assets/images/offre.jpg',
-    'assets/images/image3.png',
+    'assets/images/preview1.jpg',
+
   ];
 
   void _selectDate(
