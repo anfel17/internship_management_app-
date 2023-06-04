@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 //Api routes
-const baseUrl = 'http://192.168.1.7:8000/api/';
+const baseUrl = 'http://192.168.1.3:8000/api/';
 const consultStudentAccount = baseUrl + 'consultStudentAccount';
 const consultOffersList = baseUrl + 'consultOffersList';
 const getStudentNotif = baseUrl + 'getStudentNotif';
@@ -15,6 +15,8 @@ const modifyApplication = baseUrl + 'modifyApplication';
 const checkMarks = baseUrl + 'checkMarks';
 const applyForInternship = baseUrl + 'applyForInternship';
 const consultAttendance = baseUrl + 'consultAttendance';
+const deleteNotification = baseUrl + 'deleteNotification';
+
 
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
