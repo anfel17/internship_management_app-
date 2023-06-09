@@ -285,6 +285,14 @@ class _applicationDetailsScreenState extends State<applicationDetailsScreen> {
                       }
                     },
                   ),
+                // SizedBox(height: 15.0),
+                // TextFormField(
+                //    enabled: false,
+                //   decoration: InputDecoration(
+                //     border: OutlineInputBorder(),
+                //     labelText: widget.data['motif'] ,
+                //   ),
+                // ),
 
                 SizedBox(height: 15.0),
                 Center(

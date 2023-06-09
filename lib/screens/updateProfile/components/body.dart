@@ -145,6 +145,7 @@ class BodyState extends State<Body> {
               SizedBox(height: 15.0),
               TextFormField(
                 controller: emailController,
+                enabled: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'email',

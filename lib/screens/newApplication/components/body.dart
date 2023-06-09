@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -5,8 +6,10 @@ import 'dart:convert';
 import 'package:internship_management_system/provider/user.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internship_management_system/dialog/my_dialog.dart';
 
 import '../../../constants.dart';
+import '../../home/home_screen.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -56,7 +59,7 @@ class BodyState extends State<Body> {
       "dateD":dateD,
       "dateF":dateF,
       "theme":theme,
-      "duree":duree,
+      "duree":"duree",
       "deadline":"10-02-20",
       "resFirstName":resFirstName,
       "resLastName":resLastName,
@@ -68,16 +71,20 @@ class BodyState extends State<Body> {
 
     if (response.statusCode == 200) {
       // Handle success case
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Application information updated successfully'),
-        ),
+      MyDialog.show(
+        context,
+        'request sent successfuly',
+        '',
+        DialogType.success,
+            () {
+          Navigator.pushNamed(context, HomeScreen.routeName);
+        },
       );
     } else {
       // Handle error case
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to update application information'),
+          content: Text('Failed to sent request'),
           backgroundColor: Colors.red,
         ),
       );

@@ -43,14 +43,18 @@ class _LoginPageState extends State<LoginPage> {
         final userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.userId = userId;
 
-        // Navigate to the home page
-        Navigator.pushNamed(context, HomeScreen.routeName);
-      } else {
+            // Navigate to the home page
+            Navigator.pushNamed(context, HomeScreen.routeName);
+          }
+
+
+       else {
         final String message = response.body;
         // Show an error message to the user
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(message),
+            backgroundColor: Colors.red,
           ),
         );
       }
